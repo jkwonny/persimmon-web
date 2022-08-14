@@ -1,3 +1,5 @@
+import styled from "styled-components";
+
 interface ListingCardProps {
   image_url: string;
   slug: string;
@@ -5,9 +7,14 @@ interface ListingCardProps {
   name: string;
 }
 
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
 export const ListingCard = (item: any) => {
   return (
-    <div>
+    <Container>
       <div>{item.item.payload.collection.slug}</div>
       <a href={item.item.payload.item.permalink}>
         <img
@@ -16,6 +23,6 @@ export const ListingCard = (item: any) => {
         />
       </a>
       <div>{item.item.payload.collection.slug}</div>
-    </div>
+    </Container>
   );
 };

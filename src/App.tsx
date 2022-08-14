@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { mockData } from "./mockData/mockData";
 import { ListingCard } from "./components/ListingCard";
+import styled from "styled-components";
 
 import { OpenSeaStreamClient } from "@opensea/stream-js";
+
+const Container = styled.div`
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  justify-content: flex-start;
+`;
 
 function App() {
   const client = new OpenSeaStreamClient({
@@ -22,14 +29,14 @@ function App() {
     // });
 
     console.log(items);
-  });
+  }, []);
   return (
     <div className="App">
-      <div>
+      <Container>
         {items.map((item: any) => {
           return <ListingCard item={item} />;
         })}
-      </div>
+      </Container>
     </div>
   );
 }
