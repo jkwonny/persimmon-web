@@ -9,20 +9,23 @@ interface ListingCardProps {
 
 const Container = styled.div`
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  width: 100%;
 `;
 
 export const ListingCard = (item: any) => {
   return (
     <Container>
-      <div>{item.item.payload.collection.slug}</div>
       <a href={item.item.payload.item.permalink}>
+        <div>{item.item.payload.collection.slug}</div>
         <img
           src={item.item.payload.item.metadata.image_url}
           alt={item.item.payload.item.metadata.name}
         />
       </a>
-      <div>{item.item.payload.collection.slug}</div>
+      <div>
+        {item.item. }
+      </div>
     </Container>
   );
 };
