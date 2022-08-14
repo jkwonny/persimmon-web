@@ -14,6 +14,7 @@ const Container = styled.div`
 `;
 
 export const ListingCard = (item: any) => {
+  console.log("item", item);
   return (
     <Container>
       <a href={item.item.payload.item.permalink}>
@@ -24,7 +25,10 @@ export const ListingCard = (item: any) => {
         />
       </a>
       <div>
-        {item.item. }
+        {item.item.payload.payment_token.symbol}:
+        {Math.round(
+          parseInt(item.item.payload.sale_price) * 0.0000000000000001
+        ) / 100}
       </div>
     </Container>
   );

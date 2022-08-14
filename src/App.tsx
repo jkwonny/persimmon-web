@@ -24,11 +24,11 @@ function App() {
     // client.onItemSold("*", (event) => {
     //   // handle event
     //   setItems((prevItems: any) => {
-    //     return [...prevItems, event];
+    //     if (event.payload.item.chain.name === 'ethereum') {
+    //           return [...prevItems, event];
+    //     }
     //   });
     // });
-
-    console.log(items);
   }, []);
 
   return (
