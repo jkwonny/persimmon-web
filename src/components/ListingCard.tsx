@@ -9,6 +9,7 @@ interface ListingCardProps {
 }
 
 const MainContainer = styled.button`
+  --margin: 0.5em;
   display: flex;
   flex-direction: row;
   width: 100%;
@@ -21,50 +22,58 @@ const MainContainer = styled.button`
 
 const StyledThumbnail = styled.img`
   align-self: center;
-  height: 100px;
-  width: 20%;
+  height: 70px;
+  width: 15%;
 `;
 
 const StyledRankContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0.5em 0.5em;
+  margin: 1em;
   width: 15%;
+`;
+
+const StyledRankText = styled.div`
+  display: flex;
+  align-items: flex-start;
 `;
 
 const StyledMetadata = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1em;
+  margin: var(--margin);
   height: 100%;
   width: 100%;
-  flex-grow: 2;
 `;
 
 const ActionContainer = styled.div`
   display: flex;
   flex-direction: row;
   height: 50%;
+  width: 100%;
+  align-items: center;
+  justify-content: flex-end;
 `;
 
 const StyledButton = styled.div`
   display: flex;
-  flex-direction: row;
   border-radius: 4px;
   background-color: black;
   color: white;
   height: 50%;
-  padding: 0.5em;
+  padding: var(--margin);
+  margin: 0 var(--margin);
 `;
 
 const StyledTimeContainer = styled.div`
   display: flex;
   flex-direction: row;
   height: 50%;
+  margin-top: var(--margin);
+  justify-content: flex-end;
 `;
 
 export const ListingCard = (item: any) => {
-  console.log("item", item);
   return (
     <MainContainer>
       <StyledThumbnail
@@ -72,20 +81,19 @@ export const ListingCard = (item: any) => {
         alt={item.item.payload.item.metadata.name}
       />
       <StyledRankContainer>
-        <div>Rank: 1</div>
-        <div>#TOKENID</div>
+        <StyledRankText>Rank: 1</StyledRankText>
+        <StyledRankText>#TOKENID</StyledRankText>
       </StyledRankContainer>
       <StyledMetadata>
         <ActionContainer>
-          {item.item.payload.payment_token.symbol}:
-          {Math.round(
-            parseInt(item.item.payload.sale_price) * 0.0000000000000001
-          ) / 100}
+          {`${item.item.payload.payment_token.symbol}: ${
+            Math.round(
+              parseInt(item.item.payload.sale_price) * 0.0000000000000001
+            ) / 100
+          }`}
           <StyledButton>BUY OS</StyledButton>
         </ActionContainer>
-        <StyledTimeContainer>
-          <div>13 minutes ago</div>
-        </StyledTimeContainer>
+        <StyledTimeContainer>13 minutes ago</StyledTimeContainer>
         {/* <div>{timeSince(item.item.payload.event_timestamp)}</div> */}
       </StyledMetadata>
     </MainContainer>
