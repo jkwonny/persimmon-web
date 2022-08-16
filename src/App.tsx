@@ -6,11 +6,27 @@ import styled from "styled-components";
 
 import { OpenSeaStreamClient } from "@opensea/stream-js";
 
+interface ItemState {
+  image_url: string;
+  slug: string;
+  permalink: string;
+  name: string;
+  sale_price: number;
+}
+
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
   justify-content: flex-start;
+`;
+
+const ListingCardContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0.5em;
+  /* background-color: red; */
+  border: 1px solid black;
 `;
 
 function App() {
@@ -29,13 +45,18 @@ function App() {
     //     }
     //   });
     // });
+    // return () => client.disconnect();
   }, []);
 
   return (
     <div className="App">
       <Container>
         {items.map((item: any) => {
-          return <ListingCard item={item} />;
+          return (
+            <ListingCardContainer>
+              <ListingCard item={item} />
+            </ListingCardContainer>
+          );
         })}
       </Container>
     </div>
