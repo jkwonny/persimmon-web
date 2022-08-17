@@ -16,9 +16,15 @@ interface ItemState {
 
 const Container = styled.div`
   display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: flex-start;
+`;
+
+const SubContainer = styled.div`
+  display: flex;
   flex-direction: column;
   width: 50%;
-  justify-content: flex-start;
 `;
 
 const ListingCardContainer = styled.div`
@@ -34,7 +40,8 @@ function App() {
     token: `${process.env.REACT_APP_API_KEY}`,
   });
 
-  const [items, setItems] = useState<any>(mockData);
+  const [listItems, setListItems] = useState<any>(mockData);
+  const [soldItems, setSoldItems] = useState<any>(mockData);
 
   useEffect(() => {
     // client.onItemSold("*", (event) => {
@@ -51,13 +58,26 @@ function App() {
   return (
     <div className="App">
       <Container>
-        {items.map((item: any) => {
-          return (
-            <ListingCardContainer>
-              <ListingCard item={item} />
-            </ListingCardContainer>
-          );
-        })}
+        <SubContainer>
+          <h1>New Listings</h1>
+          {listItems.map((item: any) => {
+            return (
+              <ListingCardContainer>
+                <ListingCard item={item} />
+              </ListingCardContainer>
+            );
+          })}
+        </SubContainer>
+        <SubContainer>
+          <h1>Sold Listings</h1>
+          {soldItems.map((item: any) => {
+            return (
+              <ListingCardContainer>
+                <ListingCard item={item} />
+              </ListingCardContainer>
+            );
+          })}
+        </SubContainer>
       </Container>
     </div>
   );
