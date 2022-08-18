@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 interface ListingCardProps {
@@ -23,13 +22,13 @@ const MainContainer = styled.button`
 const StyledThumbnail = styled.img`
   align-self: center;
   height: 70px;
-  width: 15%;
+  width: 90px;
 `;
 
 const StyledRankContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 1em;
+  margin: 0 1em;
   width: 15%;
 `;
 
@@ -81,6 +80,7 @@ export const ListingCard = (item: any) => {
         alt={item.item.payload.item.metadata.name}
       />
       <StyledRankContainer>
+        {/* TODO: rank data */}
         <StyledRankText>Rank: 1</StyledRankText>
         <StyledRankText>#TOKENID</StyledRankText>
       </StyledRankContainer>
@@ -94,7 +94,7 @@ export const ListingCard = (item: any) => {
           <StyledButton>BUY OS</StyledButton>
         </ActionContainer>
         <StyledTimeContainer>13 minutes ago</StyledTimeContainer>
-        {/* <div>{timeSince(item.item.payload.event_timestamp)}</div> */}
+        {/* TODO: math for minutes ago... <div>{timeSince(item.item.payload.event_timestamp)}</div> */}
       </StyledMetadata>
     </MainContainer>
   );

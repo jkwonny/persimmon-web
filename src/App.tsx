@@ -6,13 +6,13 @@ import styled from "styled-components";
 
 import { OpenSeaStreamClient } from "@opensea/stream-js";
 
-interface ItemState {
-  image_url: string;
-  slug: string;
-  permalink: string;
-  name: string;
-  sale_price: number;
-}
+// interface ItemState {
+//   image_url: string;
+//   slug: string;
+//   permalink: string;
+//   name: string;
+//   sale_price: number;
+// }
 
 const Container = styled.div`
   display: flex;
@@ -36,9 +36,9 @@ const ListingCardContainer = styled.div`
 `;
 
 function App() {
-  const client = new OpenSeaStreamClient({
-    token: `${process.env.REACT_APP_API_KEY}`,
-  });
+  // const client = new OpenSeaStreamClient({
+  //   token: `${process.env.REACT_APP_API_KEY}`,
+  // });
 
   const [listItems, setListItems] = useState<any>(mockData);
   const [soldItems, setSoldItems] = useState<any>(mockData);
@@ -53,6 +53,7 @@ function App() {
     //   });
     // });
     // return () => client.disconnect();
+    console.log("listItems", listItems);
   }, []);
 
   return (
