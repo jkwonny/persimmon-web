@@ -14,11 +14,11 @@ import { OpenSeaStreamClient } from "@opensea/stream-js";
 //   sale_price: number;
 // }
 
-const Container = styled.div`
+const ListingContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 100%;
-  justify-content: flex-start;
+  width: 50%;
+  justify-content: center;
 `;
 
 const SubContainer = styled.div`
@@ -30,9 +30,10 @@ const SubContainer = styled.div`
 const ListingCardContainer = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 0.5em;
-  /* background-color: red; */
+  padding: 0 0.5em;
   border: 1px solid black;
+  border-radius: 8px;
+  margin: 0.1em 1em 0.1em 0;
 `;
 
 function App() {
@@ -58,7 +59,7 @@ function App() {
 
   return (
     <div className="App">
-      <Container>
+      <ListingContainer>
         <SubContainer>
           <h1>New Listings</h1>
           {listItems.map((item: any) => {
@@ -79,7 +80,7 @@ function App() {
             );
           })}
         </SubContainer>
-      </Container>
+      </ListingContainer>
     </div>
   );
 }

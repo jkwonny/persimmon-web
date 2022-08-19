@@ -17,30 +17,33 @@ const MainContainer = styled.button`
   background: none;
   padding: 0;
   cursor: pointer;
+  margin: 0.5em 0;
 `;
 
 const StyledThumbnail = styled.img`
   align-self: center;
   height: 70px;
   width: 90px;
+  border-radius: 8px;
 `;
 
 const StyledRankContainer = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0 1em;
-  width: 15%;
+  flex-basis: 15%;
+  height: 100%;
 `;
 
 const StyledRankText = styled.div`
   display: flex;
   align-items: flex-start;
+  font-weight: bold;
+  height: 50%;
 `;
 
 const StyledMetadata = styled.div`
   display: flex;
   flex-direction: column;
-  margin: var(--margin);
   height: 100%;
   width: 100%;
 `;
@@ -54,12 +57,11 @@ const ActionContainer = styled.div`
   justify-content: flex-end;
 `;
 
-const StyledButton = styled.div`
+const StyledButton = styled.button`
   display: flex;
   border-radius: 4px;
   background-color: black;
   color: white;
-  height: 50%;
   padding: var(--margin);
   margin: 0 var(--margin);
 `;
