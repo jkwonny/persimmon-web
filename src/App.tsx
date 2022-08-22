@@ -3,8 +3,12 @@ import "./App.css";
 import { mockData } from "./mockData/mockData";
 import { ListingCard } from "./components/ListingCard";
 import styled from "styled-components";
+// import { Admin } from "./components/Admin";
+import { Alchemy, Network } from "alchemy-sdk";
+import { Login } from "./components/Login";
+import { ethers } from "ethers";
 
-import { OpenSeaStreamClient } from "@opensea/stream-js";
+// import { OpenSeaStreamClient } from "@opensea/stream-js";
 
 // interface ItemState {
 //   image_url: string;
@@ -44,6 +48,36 @@ function App() {
   const [listItems, setListItems] = useState<any>(mockData);
   const [soldItems, setSoldItems] = useState<any>(mockData);
 
+  // const config = {
+  //   apiKey: process.env.REACT_ALCHEMY_API_KEY,
+  //   network: Network.ETH_MAINNET,
+  // };
+  // const alchemy = new Alchemy(config);
+
+  // const main = async () => {
+  //   // Contract address
+  //   const address = "0xed5af388653567af2f388e6224dc7c4b3241c544";
+
+  //   // Flag to omit metadata
+  //   const omitMetadata = false;
+
+  //   // Get all NFTs
+  //   const response = await alchemy.nft.getNftsForContract(address, {
+  //     omitMetadata: omitMetadata,
+  //   });
+  //   // console.log(JSON.stringify(response, null, 2));
+  // };
+
+  // const runMain = async () => {
+  //   try {
+  //     await main();
+  //     process.exit(0);
+  //   } catch (error) {
+  //     console.log(error);
+  //     process.exit(1);
+  //   }
+  // };
+
   useEffect(() => {
     // client.onItemSold("*", (event) => {
     //   // handle event
@@ -55,11 +89,32 @@ function App() {
     // });
     // return () => client.disconnect();
     console.log("listItems", listItems);
+    // runMain();
   }, []);
+
+  const [accountId, setAccountId] = useState([]);
+  const connectMMAccount = async () => {
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    // MetaMask requires requesting permission to connect users accounts
+    await provider.send("eth_requestAccounts", []);
+
+    // The MetaMask plugin also allows signing transactions to
+    // send ether and pay to change state within the blockchain.
+    // For this, you need the account signer...
+    const signer = provider.getSigner();
+    console.log("signer", signer);
+  };
+
+  useEffect(() => {
+    connectMMAccount();
+  });
 
   return (
     <div className="App">
       <ListingContainer>
+        <Login />
+        {/* <Admin /> */}
         <SubContainer>
           <h1>New Listings</h1>
           {listItems.map((item: any) => {

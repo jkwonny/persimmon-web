@@ -1,11 +1,40 @@
 import styled from "styled-components";
 
+// this file is getting too bloated. need to modularize the files
 interface ListingCardProps {
   image_url: string;
   slug: string;
   permalink: string;
   name: string;
 }
+
+export const ListingCard = (item: any) => {
+  return (
+    <MainContainer>
+      <StyledThumbnail
+        src={item.item.payload.item.metadata.image_url}
+        alt={item.item.payload.item.metadata.name}
+      />
+      <StyledRankContainer>
+        {/* TODO: rank data */}
+        <StyledRankText>Rank: 1</StyledRankText>
+        <StyledRankText>#TOKENID</StyledRankText>
+      </StyledRankContainer>
+      <StyledMetadata>
+        <ActionContainer>
+          {`${item.item.payload.payment_token.symbol}: ${
+            Math.round(
+              parseInt(item.item.payload.sale_price) * 0.0000000000000001
+            ) / 100
+          }`}
+          <StyledButton>BUY OS</StyledButton>
+        </ActionContainer>
+        <StyledTimeContainer>13 minutes ago</StyledTimeContainer>
+        {/* TODO: math for minutes ago... <div>{timeSince(item.item.payload.event_timestamp)}</div> */}
+      </StyledMetadata>
+    </MainContainer>
+  );
+};
 
 const MainContainer = styled.button`
   --margin: 0.5em;
@@ -73,31 +102,3 @@ const StyledTimeContainer = styled.div`
   margin-top: var(--margin);
   justify-content: flex-end;
 `;
-
-export const ListingCard = (item: any) => {
-  return (
-    <MainContainer>
-      <StyledThumbnail
-        src={item.item.payload.item.metadata.image_url}
-        alt={item.item.payload.item.metadata.name}
-      />
-      <StyledRankContainer>
-        {/* TODO: rank data */}
-        <StyledRankText>Rank: 1</StyledRankText>
-        <StyledRankText>#TOKENID</StyledRankText>
-      </StyledRankContainer>
-      <StyledMetadata>
-        <ActionContainer>
-          {`${item.item.payload.payment_token.symbol}: ${
-            Math.round(
-              parseInt(item.item.payload.sale_price) * 0.0000000000000001
-            ) / 100
-          }`}
-          <StyledButton>BUY OS</StyledButton>
-        </ActionContainer>
-        <StyledTimeContainer>13 minutes ago</StyledTimeContainer>
-        {/* TODO: math for minutes ago... <div>{timeSince(item.item.payload.event_timestamp)}</div> */}
-      </StyledMetadata>
-    </MainContainer>
-  );
-};
