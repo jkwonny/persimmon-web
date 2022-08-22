@@ -4,9 +4,6 @@ import { mockData } from "./mockData/mockData";
 import { ListingCard } from "./components/ListingCard";
 import styled from "styled-components";
 // import { Admin } from "./components/Admin";
-import { Alchemy, Network } from "alchemy-sdk";
-import { Login } from "./components/Login";
-import { ethers } from "ethers";
 
 // import { OpenSeaStreamClient } from "@opensea/stream-js";
 
@@ -88,54 +85,55 @@ function App() {
     //   });
     // });
     // return () => client.disconnect();
-    console.log("listItems", listItems);
+    // console.log("listItems", listItems);
     // runMain();
   }, []);
 
-  const [accountId, setAccountId] = useState([]);
-  const connectMMAccount = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const [accounts, setAccounts] = useState([]);
 
-    // MetaMask requires requesting permission to connect users accounts
-    await provider.send("eth_requestAccounts", []);
-
-    // The MetaMask plugin also allows signing transactions to
-    // send ether and pay to change state within the blockchain.
-    // For this, you need the account signer...
-    const signer = provider.getSigner();
-    console.log("signer", signer);
-  };
+  async function connectAccounts() {
+    if (window.ethereum) {
+      const accounts = await window.ethereum.request({
+        method: "eth_requestAccounts",
+      });
+      setAccounts(accounts);
+    }
+  }
 
   useEffect(() => {
-    connectMMAccount();
-  });
+    connectAccounts();
+  }, []);
 
   return (
     <div className="App">
-      <ListingContainer>
-        <Login />
-        {/* <Admin /> */}
-        <SubContainer>
-          <h1>New Listings</h1>
-          {listItems.map((item: any) => {
-            return (
-              <ListingCardContainer>
-                <ListingCard item={item} />
-              </ListingCardContainer>
-            );
-          })}
-        </SubContainer>
-        <SubContainer>
-          <h1>Sold Listings</h1>
-          {soldItems.map((item: any) => {
-            return (
-              <ListingCardContainer>
-                <ListingCard item={item} />
-              </ListingCardContainer>
-            );
-          })}
-        </SubContainer>
-      </ListingContainer>
+      {accounts.length > 0 ? (
+        <ListingContainer>
+          {/* <Admin /> */}
+          <SubContainer>
+            <h1>New Listings</h1>
+            {listItems.map((item: any, index: number) => {
+              // KEY: console.log(item.payload.transaction.hash);
+              return (
+                <ListingCardContainer key={index}>
+                  <ListingCard item={item} />
+                </ListingCardContainer>
+              );
+            })}
+          </SubContainer>
+          <SubContainer>
+            <h1>Sold Listings</h1>
+            {soldItems.map((item: any) => {
+              return (
+                <ListingCardContainer>
+                  <ListingCard item={item} />
+                </ListingCardContainer>
+              );
+            })}
+          </SubContainer>
+        </ListingContainer>
+      ) : (
+        <div>404 page!</div>
+      )}
     </div>
   );
 }

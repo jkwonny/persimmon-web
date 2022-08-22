@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { getDatabase, ref, set } from "firebase/database";
 import { initializeApp } from "firebase/app";
 
-interface AzukiMockData {
-  "contract address": {
-    slug: string;
-    floorPrice: string;
-    listings: [];
-  };
-}
+// interface AzukiMockData {
+//   "contract address": {
+//     slug: string;
+//     floorPrice: string;
+//     listings: [];
+//   };
+// }
 
 const temp = [
   {

@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 // this file is getting too bloated. need to modularize the files
-interface ListingCardProps {
-  image_url: string;
-  slug: string;
-  permalink: string;
-  name: string;
-}
+// interface ListingCardProps {
+//   image_url: string;
+//   slug: string;
+//   permalink: string;
+//   name: string;
+// }
 
 export const ListingCard = (item: any) => {
   return (
